@@ -1,4 +1,4 @@
-# ChromoChat
+# Chromochat
 
 ## Overview
 Chromochat is a cutting-edge chat application designed to bring people closer together through innovative features and a user-friendly interface.
