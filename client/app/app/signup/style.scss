@@ -1,0 +1,19 @@
+.container {
+    width: 100%; // Slightly smaller width on smaller screens
+    max-width: 500px;
+    background-color: red;
+    padding: 0 40px;
+
+    #h4-title-main {
+        font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+        padding: 0 10px;
+
+    }
+
+    .month-day-year {
+        margin-top: 10px;
+    }
+}
