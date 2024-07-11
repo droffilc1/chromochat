@@ -73,7 +73,19 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Tests
 
-Describe and show how to run the tests with code examples.
+After ensuring everything is set up correctly, update your snapshots and run your tests again:
+
+**Update Snapshots**:
+
+```bash
+npm test -- -u
+```
+
+**Run Tests**:
+
+```bash
+npm test
+```
 
 ## References
 
