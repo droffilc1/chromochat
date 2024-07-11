@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="48"
+   height="48"
+   viewBox="0 0 48 48"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="logo-chromochat.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px"
+     inkscape:zoom="6.1675357"
+     inkscape:cx="-3.080647"
+     inkscape:cy="32.99535"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:lockguides="false" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient350"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop351" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0.89788735;"
+         offset="1"
+         id="stop352" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient350"
+       id="linearGradient352-6"
+       x1="211.78484"
+       y1="199.72694"
+       x2="476.96326"
+       y2="199.72694"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.10608862,0,0,0.10704627,-24.561178,-61.043442)" />
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:0.989975;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ff00bf;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
+       id="rect360"
+       width="48"
+       height="48"
+       x="0"
+       y="0" />
+    <ellipse
+       style="fill:url(#linearGradient352-6);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.532831;stroke-dasharray:none"
+       id="ellipse2-1"
+       cx="11.972984"
+       cy="-39.663418"
+       rx="14.066207"
+       ry="14.193184"
+       transform="matrix(-0.45634869,0.88980103,-0.88728253,-0.46122632,0,0)" />
+    <circle
+       style="fill:#d19326;fill-opacity:1;stroke-width:0.0727912"
+       id="path1"
+       cx="14.710302"
+       cy="-34.605755"
+       r="9.0788612"
+       transform="rotate(117.3087)" />
+    <ellipse
+       style="fill:#ff00bf;fill-opacity:0.437159;fill-rule:nonzero;stroke:none;stroke-width:0.601651;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse354-3"
+       cx="18.074657"
+       cy="28.947386"
+       rx="15.798793"
+       ry="16.111801" />
+  </g>
+</svg>
