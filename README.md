@@ -1,74 +1,87 @@
 # Chromochat
 
 ## Overview
+
 Chromochat is a cutting-edge chat application designed to bring people closer together through innovative features and a user-friendly interface.
+Whether you're connecting with friends, family, or colleagues, Chromochat provides a rich and dynamic communication experience tailored to your needs.
 
-## Requirements
-This section is optional if there isn't any special dependencies. Else a bulletlist will suffice, e g:
+## Technologies Used
 
+- Nextjs
 - Node.js
+- Scss
 - Mongodb
-- Amazon S3 access
+- WebSockets
 
 ## Features
+
 This can be a list of features or just a description of what this project does / what can be done with it. I prefer presenting information in a bullet or numbered list as it improves the ability to scan through and gather information quickly. Short, specific pieces of information are much easier to digest.
 
 ## Motivation
 
 A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
 
-## Installation
-A quick guide on how to install your project. For example:
+## Getting Started
 
-1. Download the repo to your webserver
-2. Run npm install
-3. Install database
-4. Edit config.conf with your database settings
-5. Visit your new site!
+To get a local copy up and running you just need to follow the following steps in your terminal;
 
-## Dependencies
-Listing other peoples work that your project relies on is not only in good taste it helps show what your project is built on and adds insight to compatibility/integration with outside projects.
- 
-## API Reference
-This section is optional, but if your project is a library or plugin there should be some examples here explaining how to implement it and how to use it. There should also be explanations for functions/options/parameters in this section.
+```
+git clone "url"
+```
 
-### Hello World example
-In the head section of your index.html page include this:
+where "url" (without the quotation marks) is the url to this repository.
 
-    <script>    
-        console.log("Hello World");
-    </script>
+For example:
 
-### More advanced example
-This is a more advanced example on how to implement the libary. In the head section of your webpage include this:
+```bash
+git clone https://github.com/droffilc1/chromochat.git
+```
 
-    <script>
-        var myLib = new SuperMyLib({
-            output: "Hello World",
-            selector: ".someClass"
-        });
-        
-        myLib.init();
-    </script>
+Here you're copying the contents of the spendless repository on GitHub to your computer.
 
-Then add an element in your webpage that have the class "someClass".
+Change to the repository directory on your computer (if you are not already there):
 
-    <div class="someClass"></div>
-    
+```bash
+cd chromochat
+```
+
+Install dependencies:
+
+```bash
+npm install
+# or
+yarn
+# or
+pnpm install
+# or
+bun install
+```
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
 ## Tests
 
 Describe and show how to run the tests with code examples.
 
 ## References
-List of resources used.
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Learn Next.js](https://nextjs.org/learn)
 
 ## Authors
-El Houssain Souhail - [Github]()  
-Abderrahmane Nezhavi Nezhari - [Github]()\
+
+El Houssain Souhail - [Github](https://github.com/Ductive99)\
+Abderrahmane Nezhavi Nezhari - [Github](https://github.com/Abderrahmane369)\
 Clifford Mapesa - [Github](https://github.com/droffilc1)
-
-## Contributing
-This section is for open source projects. Write how a 3rd party can contribute with this project to help out.
-
-## Licence
-If there is a licence, specifically for open source projects, it should be here. Else this section can be removed.
