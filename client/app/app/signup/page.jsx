@@ -1,153 +1,101 @@
-"use client";
-import {
-    Box,
-    Container,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Select,
-    Stack,
-    TextField,
-    Typography
-} from "@mui/material";
 import "./style.scss";
-import { useState } from "react";
+import { Box, Button, Divider, Stack, Typography } from "@mui/material";
+import CreateAcountPopUp from "./components/CreateAcountPopUp";
+import { FaGoogle, FaApple } from "react-icons/fa";
+import { BsApple } from "react-icons/bs";
+import Head from "next/head";
+import Image from "next/image";
+import HeroLogoBanner from "./public/svg/logo-chromochat.svg";
 
-export default function SignupPage() {
+export default function Page() {
     return (
-        // the sign up box
-        <Container className="container">
-            <Typography variant="h4" marginBottom={3} id="h4-title-main">
-                {" "}
-                Create your account{" "}
-            </Typography>
-            {/* the form */}
-            <Box className="sign-up-form">
-                <Stack spacing={2}>
-                    {/* full-name input */}
-                    <TextField
-                        type="text"
-                        variant="outlined"
-                        label="Full name"
-                        className="input-outlined-basic"
-                    />
-                    {/* email input */}
-                    <TextField
-                        type="email"
-                        variant="outlined"
-                        label="Email"
-                        autoComplete="email"
-                        className="input-outlined-basic"
-                    />
-                </Stack>
+        <>
+            <Head>
+                <title>Next App</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <main>
+                <Box id="main-container">
+                    <Stack direction="row" id="flex-container-divider">
+                        <Box id="part-1">
+                            <Box id="wrapper__1" mx="auto">
+                                <Typography variant="h1" id="main-h1">
+                                    It's all about chatting
+                                </Typography>
 
-                {/* birth date */}
-                <Box className="birth-date" marginTop={3}>
-                    {/* ### */}
-                    <Typography variant="h6">Birth date</Typography>
-                    <Typography variant="subtitle1">
-                        This information will not be displayed publicly. Confirm
-                        your age, even if this account is for a business, a pet,
-                        or something else.
-                    </Typography>
+                                <Box id="box-1">
+                                    {" "}
+                                    <Typography variant="h2" id="main-h2">
+                                        Sign up now.
+                                    </Typography>
+                                    {/* 1 */}
+                                    <Box id="box-1-inner1">
+                                        <Button
+                                            className="signup-with-_"
+                                            variant="contained"
+                                            startIcon={<FaGoogle />}
+                                            color="secondary"
+                                        >
+                                            Sign up with Google
+                                        </Button>
+                                        <Button
+                                            className="signup-with-_"
+                                            variant="contained"
+                                            startIcon={<BsApple />}
+                                            color="secondary"
+                                        >
+                                            Sign up with Apple
+                                        </Button>
+                                    </Box>
+                                    {/* 2 */}
+                                    <Box id="box-1-inner2" my="10px">
+                                        <Divider id="divider" variant="middle">
+                                            or
+                                        </Divider>
+                                    </Box>
+                                    {/* 3 */}
+                                    <Box id="create-account-box">
+                                        <Button
+                                            id="create-account-button"
+                                            variant="contained"
+                                        >
+                                            Create an account
+                                        </Button>
+                                        <Box>
+                                            <Typography
+                                                variant="subtitle2"
+                                                id="terms-of-service"
+                                            >
+                                                In signing up, you agree to the
+                                                Terms of Service and the Privacy
+                                                Policy, including the Use of
+                                                Cookies.
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                    {/* 4 */}
+                                    <Box id="sign-in-box">
+                                        <Typography
+                                            variant="subtitle1"
+                                            id="already-have-account"
+                                        >
+                                            Already got an account?
+                                        </Typography>
+                                        <Button id="sign-in-button">
+                                            Sign in
+                                        </Button>
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Box>
 
-                    {/* m/d/y */}
-                    <BirthDateSelector />
+                        {/* PART 2 */}
+                        <Box id="part-2">
+                            <Image id="hero-logo-banner"  src={HeroLogoBanner}></Image>
+                        </Box>
+                    </Stack>
                 </Box>
-            </Box>
-        </Container>
+            </main>
+        </>
     );
 }
-
-const BirthDateSelector = () => {
-    const [month, setMonth] = useState("");
-    const [day, setDay] = useState("");
-    const [year, setYear] = useState("");
-
-    const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    ];
-
-    const days = Array.from({ length: 31 }, (_, i) => i + 1);
-    const years = Array.from(
-        { length: 101 },
-        (_, i) => new Date().getFullYear() - i
-    );
-
-    return (
-        <Box className="month-day-year">
-            <Stack direction="horizontal" gap={2}>
-                {/* Months */}
-                <Box width={220}>
-                    <FormControl fullWidth>
-                        <InputLabel id="month-select-lbl">Month</InputLabel>
-                        <Select
-                            value={month}
-                            labelId="month-select-lbl"
-                            id="month-select"
-                            label="Month"
-                            onChange={(e) => setMonth(e.target.value)}
-                        >
-                            {months.map((m, i) => (
-                                <MenuItem key={i} value={m}>
-                                    {m}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Box>
-
-                {/* Days */}
-                <Box width={100}>
-                    <FormControl fullWidth>
-                        <InputLabel id="month-select-lbl">Day</InputLabel>
-                        <Select
-                            value={day}
-                            labelId="day-select-lbl"
-                            id="day-select"
-                            label="Day"
-                            onChange={(e) => setDay(e.target.value)}
-                        >
-                            {days.map((m, i) => (
-                                <MenuItem key={i} value={m}>
-                                    {m}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Box>
-
-                {/* Years */}
-                <Box width={100}>
-                    <FormControl fullWidth>
-                        <InputLabel id="month-select-lbl">Year</InputLabel>
-                        <Select
-                            value={year}
-                            labelId="year-select-lbl"
-                            id="year-select"
-                            label="Year"
-                            onChange={(e) => setYear(e.target.value)}
-                        >
-                            {years.map((m, i) => (
-                                <MenuItem key={i} value={m}>
-                                    {m}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Box>
-            </Stack>
-        </Box>
-    );
-};
