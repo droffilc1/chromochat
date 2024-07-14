@@ -1,10 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap');
+
 //variables
-$primary-color: #eeeeee;
-$secondary-color: black;
-$grey-color: #787a7a;
-$light-dark-color: #657786;
-$border-primary: #2c2e31;
-$spicy-color: #E1E8ED;
+@import '../styles/variables';
+
 
 html,
 body {
@@ -45,10 +44,28 @@ main {
                 width: 60%;
                 height: 100%;
                 // // //
-                margin: 10%;
+                margin: 5%;
                 margin-left: 24%;
-                // background-color: lightgreen;
 
+                #logo-box {
+                    display: flex;
+                    align-items: baseline;
+                    gap: 10px;
+
+                    #logo-img {
+                        width: auto;
+                        transform: scale(1.1);
+                    }
+
+                    #logo-txt {
+                        font: {
+                            size: 35px;
+                            weight: 700;
+                        }
+                    }
+                }
+
+                // background-color: lightgreen;
                 #main-h1 {
                     background-image: linear-gradient(109.6deg, rgba(103, 30, 117, 1) 11.2%, rgba(252, 76, 2, 1) 91.1%);
                     background-clip: text;
@@ -64,7 +81,7 @@ main {
                 #main-h2 {
                     font: {
                         weight: 700;
-                        size: 4vh;
+                        size: 30px;
                     }
 
                     margin-top: 50px;
@@ -72,7 +89,7 @@ main {
                 }
 
                 #box-1 {
-                    width: 75%;
+                    width: 80%;
 
                     #box-1-inner1 {
                         display: flex;
@@ -129,7 +146,7 @@ main {
                     }
 
                     #sign-in-box {
-                        margin-top: 70px;
+                        margin-top: 30px;
                         display: flex;
                         align-items: baseline;
                         gap: 10px;

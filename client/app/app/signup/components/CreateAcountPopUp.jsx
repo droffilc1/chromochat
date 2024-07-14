@@ -19,8 +19,10 @@ import { useEffect, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import { months, days, years, textContentData } from "../data";
 import { debounce } from "lodash";
+import HeroLogoBanner from "../public/svg/logo-chromochat-ic.svg";
+import Image from "next/image";
 
-export default function CreateAcountPopUp() {
+export default function CreateAcountPopUp({ handleClick }) {
     /**
      * Not really!
      * @returns SIGNUP PAGE
@@ -89,15 +91,22 @@ export default function CreateAcountPopUp() {
                 >
                     <Box id="signup-close">
                         <IconButton
-                            aria-label="Example"
-                            size="small"
+                            aria-label="close"
+                            size="medium"
                             color="secondary"
+                            onClick={handleClick}
+                            id
                         >
                             <IoIosClose size="35px" />
                         </IconButton>
                     </Box>
                     <Box id="signup-logo" width="100%" textAlign="center">
                         {/* <h1>Chromochat</h1> */}
+                        <Image
+                            id="hero-logo-banner"
+                            src={HeroLogoBanner}
+                            width={65}
+                        ></Image>
                     </Box>
                 </Stack>
                 <Box
