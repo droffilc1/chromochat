@@ -9,12 +9,12 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import "../styles/chat-interface.scss";
-import MessageBox from "./MessageBox";
-import InputsArea from "./InputsArea";
+import "../../styles/chat-interface.scss";
 import { FaHashtag } from "react-icons/fa6";
 import { HiHashtag } from "react-icons/hi2";
 import { useEffect, useRef, useState } from "react";
+import MessageBox from "../MessageBox/MessageBox";
+import InputArea from "../InputsArea/InputsArea";
 
 function getRandomInt(min, max) {
     if (min >= max) {
@@ -93,7 +93,7 @@ export default function ChatInterface() {
                     messages={messages}
                     msgEndRef={messagesEndRef}
                 />
-                <InputsArea
+                <InputArea
                     onClick={sendMessage}
                     onChange={handleChange}
                     value={inputTxt}

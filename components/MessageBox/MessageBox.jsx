@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import "../styles/message-box.scss";
+import "../../styles/message-box.scss";
 
 export default function MessageBox(props) {
     return (
