@@ -1,5 +1,5 @@
 {
-  "name": "chromochat",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -17,6 +17,7 @@
     "@mui/material": "^5.16.0",
     "@mui/material-nextjs": "^5.15.11",
     "axios": "^1.7.2",
+    "express": "^4.19.2",
     "lodash": "^4.17.21",
     "next": "14.2.4",
     "react": "^18",
