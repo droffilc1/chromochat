@@ -2,6 +2,7 @@ import { Box, IconButton, Stack, TextField } from "@mui/material";
 import { MdOutlineEmojiSymbols } from "react-icons/md";
 import { LuLink2 } from "react-icons/lu";
 import { IoMdSend } from "react-icons/io";
+import { MdOutlineStar } from "react-icons/md";
 
 export default function InputArea({ onClick, onChange, onKeyDown, value, inputRef }) {
     return (
@@ -10,7 +11,7 @@ export default function InputArea({ onClick, onChange, onKeyDown, value, inputRe
                 <Stack direction="row" id="ifc-stacker-1">
                     <Stack direction="row" gap="10px" id="ifc-stacker-2">
                         <IconButton className="icons-for">
-                            <MdOutlineEmojiSymbols />
+                            <MdOutlineStar />
                         </IconButton>
                         <IconButton className="icons-for">
                             <LuLink2 />

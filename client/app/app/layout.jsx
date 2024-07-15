@@ -5,7 +5,7 @@ import "./globals.scss";
 
 export const metadata = {
     title: "Chromochat",
-    description: "A chat web app for everyone",
+    description: "A chat web app for Web stack portfolio",
     icons: {
         icon: '/logo-chromochat.svg'
     }

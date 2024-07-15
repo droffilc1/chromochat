@@ -22,6 +22,10 @@
         #stacker-msgbox {
             #message-content {
                 align-self: flex-end;
+
+                font: {
+                    size: 14px;
+                }
             }
 
             #extra-width_1 {
@@ -36,6 +40,7 @@
             color: $grey-color;
             padding: 0;
             margin-top: -5px;
+            opacity: 0.93;
 
             font: {
                 size: 11px;
@@ -49,10 +54,10 @@
 #mssg-container-instance-right {
     // background-color: red;
     justify-content: flex-end;
-    @include mssg-container-instance(rgba(120, 67, 236, 0.326))
+    @include mssg-container-instance(rgba(109, 49, 236, 0.388))
 }
 
 #mssg-container-instance-left {
     justify-content: flex-start;
-    @include mssg-container-instance(rgba(49, 43, 37, 0.366))
+    @include mssg-container-instance(rgba(47, 46, 41, 0.338))
 }

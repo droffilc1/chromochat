@@ -2,6 +2,7 @@
 import {
     Box,
     Container,
+    Hidden,
     Icon,
     IconButton,
     Stack,
@@ -9,15 +10,10 @@ import {
     Typography,
 } from "@mui/material";
 import "../styles/chat-interface.scss";
-import { MdOutlineEmojiSymbols } from "react-icons/md";
-import { LuUnlink2 } from "react-icons/lu";
-import { FaLink } from "react-icons/fa";
-import { LuLink2 } from "react-icons/lu";
-import { TiMicrophoneOutline } from "react-icons/ti";
-import { IoMdSend } from "react-icons/io";
 import MessageBox from "./MessageBox";
 import InputsArea from "./InputsArea";
 import { FaHashtag } from "react-icons/fa6";
+import { HiHashtag } from "react-icons/hi2";
 import { useEffect, useRef, useState } from "react";
 
 function getRandomInt(min, max) {
@@ -33,6 +29,27 @@ export default function ChatInterface() {
         {
             id: 0,
             txt: "Hey, you did not steal that, right?",
+            type: "right",
+        },
+        {
+            id: 1,
+            txt: "No, I didn't",
+            type: "left",
+        },
+        {
+            id: 2,
+            txt: "I tried to shot but didn't work",
+            type: "left",
+        },
+        {
+            id: 3,
+            txt: "It's useless, but who cares?",
+            type: "left",
+        },
+        {
+            id: 5,
+            txt: "right?",
+            type: "left",
         },
     ]);
 
@@ -43,7 +60,10 @@ export default function ChatInterface() {
 
     const sendMessage = () => {
         if (inputTxt.trim()) {
-            setMessages([...messages, { id: messages.length, txt: inputTxt }]);
+            setMessages([
+                ...messages,
+                { id: messages.length, txt: inputTxt, type: "right" },
+            ]);
             setInputTxt("");
             if (inputRef.current) inputRef.current.focus();
         }
@@ -56,7 +76,10 @@ export default function ChatInterface() {
     const handleKeyDown = (_) => (_.key === "Enter" ? sendMessage() : null);
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        messagesEndRef.current?.scrollIntoView({
+            block: "nearest",
+            behavior: "smooth",
+        });
     };
 
     useEffect(() => {
@@ -83,30 +106,32 @@ export default function ChatInterface() {
 }
 
 const DiscussionBodyDisplay = ({ messages, msgEndRef }) => {
-    const randInt = getRandomInt(0, 1);
     return (
         <>
             <Box id="discussion-body">
                 <Container>
                     <Box id="beginning--txt">
                         <Stack direction="row" alignItems="center" gap="3px">
-                            <FaHashtag />
+                            <HiHashtag />
                             <Typography>
                                 Start your first conversation with @Nezhavi
                             </Typography>
                         </Stack>
                     </Box>
-                    <Stack gap={0.3}>
+                    <Stack gap={0.3} direction="column">
                         {messages.map((instance) => (
                             <MessageBox
-                                boxPosition={["right", "left"][0]}
+                                boxPosition={instance.type}
                                 key={instance.id}
+                                sx={{}}
                             >
                                 {instance.txt}
                             </MessageBox>
                         ))}
+                        {messages.length > 0 && (
+                            <Box ref={msgEndRef} height="50px" />
+                        )}{" "}
                     </Stack>
-                    <Box width="100%" height="50px" ref={msgEndRef} />
                 </Container>
             </Box>
         </>

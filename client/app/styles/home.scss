@@ -7,8 +7,8 @@ body {
     width: 100%;
     height: 100vh;
     background-color: $secondary-color;
-    overflow: hidden;
     scroll-behavior: smooth;
+    overflow: hidden;
 }
 
 main {
@@ -33,7 +33,7 @@ main {
                 border-right: 1px solid $border-primary;
 
                 .stacked-p1 {
-                    margin-top: 20px;
+                    margin-top: 15px;
                     height: 100%;
 
                     text-align: center;
@@ -90,7 +90,7 @@ main {
 
                     #stacker-discussions {
                         // background: rgb(111, 83, 83);
-                        padding-right: 13px;
+                        padding-right: 20px;
                         height: 100%;
                         width: 100%;
                         overflow-y: scroll;
@@ -126,16 +126,27 @@ main {
 
                                             height: 100%;
 
-                                            #profile-name {}
+                                            #profile-name {
+                                                font: {
+                                                    size: 17px;
+                                                }
+                                            }
                                         }
 
                                         #latest-message {
                                             color: $grey-color;
 
+                                            font: {
+                                                size: 15px;
+                                            }
                                         }
 
                                         #sent-time {
                                             color: $grey-color;
+
+                                            font: {
+                                                size: 13px;
+                                            }
                                         }
                                     }
                                 }
@@ -156,16 +167,22 @@ main {
     }
 }
 
-// Corrected scroll bar styles
-::-webkit-scrollbar-track {
-    background: none;
-}
+// Custom scrollbar styles
+* {
+    scrollbar-width: thin; // For Firefox
+    scrollbar-color: $border-primary transparent; // For Firefox
 
-::-webkit-scrollbar-thumb {
-    background-color: $border-primary;
-    border-radius: 10px;
-}
+    // For WebKit-based browsers (Chrome, Safari, etc.)
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
 
-::-webkit-scrollbar {
-    width: 8px;
+    &::-webkit-scrollbar-track {
+        background: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $border-primary;
+        border-radius: 10px;
+    }
 }
