@@ -6,6 +6,8 @@ const cors = require("cors");
 const socketIo = require("socket.io");
 const authRoutes = require('./routes/auth');
 const roomRoute = require('./routes/rooms');
+const Message = require('./models/Message');
+const User = require("./models/User");
 
 dotenv.config();
 
@@ -38,14 +40,21 @@ mongoose.connect(process.env.MONGO_URI, {
 io.on('connection', (socket) => {
   console.log('New client connected');
 
-  socket.on('joinRoom', ({ username, room }) => {
-    socket.join(room);
-    socket.to(room).emit('message', `${username} has joined the room`);
+  socket.on('joinRoom', async ({ username, roomId }) => {
+    const user = await User.findOne({ username });
+    socket.join(roomId);
+    socket.to(roomId).emit('message', `${username} has joined the room`);
   });
 
-  socket.on('chatMessage', (msg) => {
-    const user = getUser(socket.id);
-    io.to(user.room).emit('message', msg);
+  socket.on('chatMessage', async (msg) => {
+    const newMessage = new Message({
+      room: roomId,
+      user: user._id,
+      text: msg,
+    });
+
+    await newMessage.save();
+    io.to(roomId).emit('message', msg);
   });
 
   socket.on('disconnect', () => {
