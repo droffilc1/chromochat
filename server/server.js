@@ -1,17 +1,39 @@
-import express from "express";
-import cors from "cors";
+const express = require("express");
+const http = require("http");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const socketIo = require("socket.io");
+
+dotenv.config();
 
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
 
+// Middleware
+app.use(express.json());
 app.use(cors());
 
-app.get("/api/v1/users", (req, res) => {
-  const users = [
-    { id: 1, name: "John Doe" },
-    { id: 2, name: "Jane Doe" },
-  ];
+// Sample route
+app.get("/", (req, res) => {
+  res.send('Chat app backend');
+});
 
-  return res.status(200).json({ users });
+// Database connection
+mongoose.connect(process.env.MONGO_URI, {
+}).then(() => {
+  console.log('Connected to MongoDB');
+}).catch((error) => {
+  console.error('Error connecting to MongoDB:', error);
+});
+
+// Socket.io setup
+io.on('connection', (socket) => {
+  console.log('New client connected');
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
 });
 
 // Server running
