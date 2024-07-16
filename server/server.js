@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const socketIo = require("socket.io");
+const authRoutes = require('./routes/auth');
 
 dotenv.config();
 
@@ -14,6 +15,9 @@ const io = socketIo(server);
 // Middleware
 app.use(express.json());
 app.use(cors());
+
+// Use routes
+app.use('/api/auth', authRoutes);
 
 // Sample route
 app.get("/", (req, res) => {
