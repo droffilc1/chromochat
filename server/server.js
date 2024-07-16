@@ -8,6 +8,7 @@ const authRoutes = require('./routes/auth');
 const roomRoute = require('./routes/rooms');
 const Message = require('./models/Message');
 const User = require("./models/User");
+const { swaggerUi, specs } = require('./swagger');
 
 dotenv.config();
 
@@ -18,10 +19,14 @@ const io = socketIo(server);
 // Middleware
 app.use(express.json());
 app.use(cors());
+app.disable('x-powered-by');
 
 // Use routes
 app.use('/api/auth', authRoutes);
 app.use('/api/rooms', roomRoute);
+
+// Swagger documentation route
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // Sample route
 app.get("/", (req, res) => {
