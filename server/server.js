@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const socketIo = require("socket.io");
 const authRoutes = require('./routes/auth');
+const roomRoute = require('./routes/rooms');
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(cors());
 
 // Use routes
 app.use('/api/auth', authRoutes);
+app.use('/api/rooms', roomRoute);
 
 // Sample route
 app.get("/", (req, res) => {
