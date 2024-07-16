@@ -31,6 +31,17 @@ mongoose.connect(process.env.MONGO_URI, {
 // Socket.io setup
 io.on('connection', (socket) => {
   console.log('New client connected');
+
+  socket.on('joinRoom', ({ username, room }) => {
+    socket.join(room);
+    socket.to(room).emit('message', `${username} has joined the room`);
+  });
+
+  socket.on('chatMessage', (msg) => {
+    const user = getUser(socket.id);
+    io.to(user.room).emit('message', msg);
+  });
+
   socket.on('disconnect', () => {
     console.log('Client disconnected');
   });
