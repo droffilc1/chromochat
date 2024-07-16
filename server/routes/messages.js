@@ -1,6 +1,7 @@
 const express = require('express');
 const Message = require('../models/Message');
 const Room = require('../models/Room');
+const User = require('../models/User');
 
 const router = express.Router();
 
@@ -120,6 +121,56 @@ router.get('/:roomId', async (req, res) => {
     const messages = await Message.find({ roomId });
 
     res.status(200).json(messages);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * @swagger
+ * /messages/users/{roomId}:
+ *   get:
+ *     summary: Retrieve bios of users in a chat room
+ *     tags: [Messages]
+ *     parameters:
+ *       - in: path
+ *         name: roomId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the room
+ *     responses:
+ *       200:
+ *         description: List of users with their bios
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   username:
+ *                     type: string
+ *                   bio:
+ *                     type: string
+ *       404:
+ *         description: Room not found
+ */
+router.get('/users/:roomId', async (req, res) => {
+  const { roomId } = req.params;
+
+  try {
+    const room = await Room.findById(roomId).populate('users', 'username bio');
+    if (!room) {
+      return res.status(404).json({ message: 'Room not found' });
+    }
+
+    const users = room.users.map(user => ({
+      username: user.username,
+      bio: user.bio,
+    }));
+
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
