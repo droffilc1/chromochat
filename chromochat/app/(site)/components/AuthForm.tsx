@@ -8,6 +8,8 @@ import { useCallback, useState } from 'react';
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
 import { BsGithub, BsGoogle } from 'react-icons/bs';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
+import { signIn } from 'next-auth/react';
 
 
 type Variant = 'SIGNIN' | 'SIGNUP';
@@ -39,17 +41,38 @@ const AuthForm = () => {
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true);
         if (variant === 'SIGNIN') {
-            // NextAuth signin logic
+            signIn('credentials', {
+                ...data,
+                redirect: false
+            })
+            .then((callback) => {
+                if (callback?.error) {
+                    toast.error('Invalid credentials');
+                } else if (callback?.ok) {
+                    toast.success('Signed in successfully');
+                }
+            })
+            .finally(() => setIsLoading(false));
         }
         if (variant === 'SIGNUP') {
             axios.post('/api/register', data)
+            .catch(() => toast.error('Something went wrong'))
+            .finally(() => setIsLoading(false));
         }
     }
 
     const socialAction = (action: string) => {
         setIsLoading(true);
 
-        // NextAuth social signin logic
+        signIn(action, { redirect: false })
+        .then((callback) => {
+            if (callback?.error) {
+                toast.error('Invalid credentials');
+            } else if (callback?.ok) {
+                toast.success('Signed in successfully');
+            }
+        })
+        .finally(() => setIsLoading(false));
     }
 
     return (

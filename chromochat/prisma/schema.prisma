@@ -14,14 +14,14 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String?
-  email     String?   @unique
-  emailVerified DateTime?
-  image String?
-  hashedPassword String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  name            String?
+  email           String?   @unique
+  emailVerified   DateTime?
+  image           String?
+  hashedPassword  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   // Relations
   conversationIds String[] @db.ObjectId
@@ -36,17 +36,17 @@ model User {
 
 model Account {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
-  userId  String @db.ObjectId
-  type    String
-  provider String
-  providerAccountId String
-  refreshToken String? @db.String
-  accessToken String? @db.String
-  expiresAt Int?
-  tokenType String?
-  scope String?
-  idToken String? @db.String
-  sessionState String?
+  userId             String   @db.ObjectId
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.String
+  access_token       String?  @db.String
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.String
+  session_state      String?
 
   // Relations
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -55,11 +55,11 @@ model Account {
 }
 
 model Conversation {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String?
-  createdAt DateTime @default(now())
-  lastMessageAt DateTime @default(now())
-  isGroup Boolean?
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String?
+  createdAt       DateTime @default(now())
+  lastMessageAt   DateTime @default(now())
+  isGroup         Boolean?
 
   // Relations
   messageIds String[] @db.ObjectId
