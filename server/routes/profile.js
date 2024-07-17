@@ -1,6 +1,8 @@
 const express = require('express');
-const upload = require('../middleware/multer'); // Import the multer configuration
-const User = require('../models/User');
+const upload = require('../middleware/multer');
+const profileController = require('../controllers/profileController');
+const authenticateToken = require('../middleware/auth');
+
 const router = express.Router();
 
 /**
@@ -16,6 +18,8 @@ const router = express.Router();
  *   post:
  *     summary: Upload a profile picture
  *     tags: [Profile]
+ *     security:
+ *       - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -31,18 +35,13 @@ const router = express.Router();
  *         description: Profile picture uploaded successfully
  *       400:
  *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  */
-router.post('/picture', upload.single('profilePicture'), async (req, res) => {
-  const userId = req.user.id;
-  const profilePicture = req.file.path; // URL of the uploaded file on Cloudinary
-
-  try {
-    await User.findByIdAndUpdate(userId, { profilePicture });
-    res.status(200).json({ message: 'Profile picture uploaded successfully', profilePicture });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+router.post('/picture', upload.single('profilePicture'), authenticateToken,
+  profileController.uploadProfilePicture);
 
 /**
  * @swagger
@@ -50,6 +49,8 @@ router.post('/picture', upload.single('profilePicture'), async (req, res) => {
  *   post:
  *     summary: Update user bio
  *     tags: [Profile]
+ *     security:
+ *       - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -65,17 +66,11 @@ router.post('/picture', upload.single('profilePicture'), async (req, res) => {
  *         description: Bio updated successfully
  *       400:
  *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  */
-router.post('/bio', async (req, res) => {
-  const userId = req.user.id;
-  const { bio } = req.body;
-
-  try {
-    await User.findByIdAndUpdate(userId, { bio });
-    res.status(200).json({ message: 'Bio updated successfully', bio });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+router.post('/bio', authenticateToken, profileController.updateBio);
 
 module.exports = router;

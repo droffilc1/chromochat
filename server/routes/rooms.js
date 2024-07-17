@@ -1,5 +1,6 @@
 const express = require('express');
-const Room = require('../models/Room');
+const roomController = require('../controllers/roomController');
+const authenticateToken = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -35,6 +36,8 @@ const router = express.Router();
  *   post:
  *     summary: Create a new chat room
  *     tags: [Rooms]
+ *     security:
+ *       - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -50,24 +53,12 @@ const router = express.Router();
  *               $ref: '#/components/schemas/Room'
  *       400:
  *         description: Room already exists
+ *       401:
+ *        description: Unauthorized
+ *       403:
+ *        description: Forbidden
  */
-router.post('/create', async (req, res) => {
-  const { name } = req.body;
-
-  try {
-    const room = await Room.findOne({ name });
-    if (room) {
-      return res.status(400).json({ message: 'Room already exists' });
-    }
-
-    const newRoom = new Room({ name });
-    await newRoom.save();
-
-    res.status(201).json(newRoom);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+router.post('/create', authenticateToken, roomController.createRoom);
 
 /**
  * @swagger
@@ -75,6 +66,8 @@ router.post('/create', async (req, res) => {
  *   post:
  *     summary: Join an existing chat room
  *     tags: [Rooms]
+ *     security:
+ *       - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -94,23 +87,11 @@ router.post('/create', async (req, res) => {
  *               $ref: '#/components/schemas/Room'
  *       404:
  *         description: Room not found
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  */
-router.post('/join', async (req, res) => {
-  const { name, userId } = req.body;
-
-  try {
-    const room = await Room.findOne({ name });
-    if (!room) {
-      return res.status(404).json({ message: 'Room not found' });
-    }
-
-    room.users.push(userId);
-    await room.save();
-
-    res.status(200).json(room);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+router.post('/join', authenticateToken, roomController.joinRoom);
 
 module.exports = router;

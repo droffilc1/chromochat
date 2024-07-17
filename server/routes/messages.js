@@ -1,7 +1,6 @@
 const express = require('express');
-const Message = require('../models/Message');
-const Room = require('../models/Room');
-const User = require('../models/User');
+const messageController = require('../controllers/messageController');
+const authenticateToken = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -13,7 +12,6 @@ const router = express.Router();
  *       type: object
  *       required:
  *         - roomId
- *         - sender
  *         - content
  *       properties:
  *         roomId:
@@ -40,10 +38,12 @@ const router = express.Router();
 
 /**
  * @swagger
- * /messages/send:
+ * '/messages/send':
  *   post:
  *     summary: Send a message to a chat room
  *     tags: [Messages]
+ *     security:
+ *       - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -59,30 +59,12 @@ const router = express.Router();
  *               $ref: '#/components/schemas/Message'
  *       400:
  *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *        description: Forbidden
  */
-router.post('/send', async (req, res) => {
-  const { roomId, sender, content } = req.body;
-
-  try {
-    const room = await Room.findById(roomId);
-    if (!room) {
-      return res.status(404).json({ message: 'Room not found' });
-    }
-
-    const newMessage = new Message({
-      roomId,
-      sender,
-      content,
-      timestamp: new Date(),
-    });
-
-    await newMessage.save();
-
-    res.status(201).json(newMessage);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+router.post('/send', authenticateToken, messageController.sendMessage);
 
 /**
  * @swagger
@@ -90,6 +72,8 @@ router.post('/send', async (req, res) => {
  *   get:
  *     summary: Retrieve messages from a chat room
  *     tags: [Messages]
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: roomId
@@ -108,23 +92,12 @@ router.post('/send', async (req, res) => {
  *                 $ref: '#/components/schemas/Message'
  *       404:
  *         description: Room not found
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  */
-router.get('/:roomId', async (req, res) => {
-  const { roomId } = req.params;
-
-  try {
-    const room = await Room.findById(roomId);
-    if (!room) {
-      return res.status(404).json({ message: 'Room not found' });
-    }
-
-    const messages = await Message.find({ roomId });
-
-    res.status(200).json(messages);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+router.get('/:roomId', authenticateToken, messageController.getMessages);
 
 /**
  * @swagger
@@ -132,6 +105,8 @@ router.get('/:roomId', async (req, res) => {
  *   get:
  *     summary: Retrieve bios of users in a chat room
  *     tags: [Messages]
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: roomId
@@ -155,25 +130,11 @@ router.get('/:roomId', async (req, res) => {
  *                     type: string
  *       404:
  *         description: Room not found
+ *       401:
+ *        description: Unauthorized
+ *       403:
+ *        description: Forbidden
  */
-router.get('/users/:roomId', async (req, res) => {
-  const { roomId } = req.params;
-
-  try {
-    const room = await Room.findById(roomId).populate('users', 'username bio');
-    if (!room) {
-      return res.status(404).json({ message: 'Room not found' });
-    }
-
-    const users = room.users.map(user => ({
-      username: user.username,
-      bio: user.bio,
-    }));
-
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+router.get('/users/:roomId', authenticateToken, messageController.getUserBio);
 
 module.exports = router;

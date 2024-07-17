@@ -4,11 +4,13 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const socketIo = require("socket.io");
-const authRoutes = require('./routes/auth');
-const roomRoute = require('./routes/rooms');
 const Message = require('./models/Message');
 const User = require("./models/User");
 const { swaggerUi, specs } = require('./swagger');
+const authRoutes = require('./routes/auth');
+const roomRoutes = require('./routes/rooms');
+const messageRoutes = require('./routes/messages');
+const profileRoutes = require('./routes/profile');
 
 dotenv.config();
 
@@ -22,10 +24,12 @@ app.use(cors());
 app.disable('x-powered-by');
 
 // Use routes
-app.use('/api/auth', authRoutes);
-app.use('/api/rooms', roomRoute);
+app.use('/auth', authRoutes);
+app.use('/rooms', roomRoutes);
+app.use('/messages', messageRoutes);
+app.use('/profile', profileRoutes);
 
-// Swagger documentation route
+// Swagger docs route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // Sample route
@@ -71,5 +75,6 @@ io.on('connection', (socket) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
-  console.log(`Press CTRL + C to stop it!`);
-})
+});
+
+module.exports = app;

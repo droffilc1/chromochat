@@ -1,16 +1,16 @@
 const multer = require('multer');
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const path = require('path');
 const cloudinary = require('../config/cloudinary');
 
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'profile-pictures',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-    transformation: [{ width: 500, height: 500, crop: 'limit' }],
-  },
-});
+const storage = multer.diskStorage({});
 
-const upload = multer({ storage });
+const fileFilter = (req, file, cb) => {
+  let ext = path.extname(file.originalname);
+  if (ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png' && ext !== '.webp') {
+    cb(new Error('File type is not supported'), false);
+    return;
+  }
+  cb(null, true);
+};
 
-module.exports = upload;
+module.exports = multer({ storage, fileFilter });
