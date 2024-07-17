@@ -9,7 +9,7 @@ import {
 } from "./";
 import './style.scss'
 
-export function ConversationsSection() {
+export default function ConversationsSection() {
     return (
         <Box id="conversations-section">
             <Box id="wrapper-p2">

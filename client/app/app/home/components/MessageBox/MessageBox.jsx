@@ -1,9 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-<<<<<<<< HEAD:client/app/app/home/components/MessageBox/MessageBox.jsx
 import "./style.scss";
-========
-import "../../styles/message-box.scss";
->>>>>>>> cf4227531bbc57ad5afef2c1dcc7bf21921fa79a:client/components/MessageBox/MessageBox.jsx
 
 export default function MessageBox(props) {
     return (

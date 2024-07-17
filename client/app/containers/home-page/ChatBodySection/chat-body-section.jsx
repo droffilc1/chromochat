@@ -1,28 +1,9 @@
 "use client";
-<<<<<<<< HEAD:client/app/containers/home-page/ChatBodySection/chat-body-section.jsx
 import { Box } from "@mui/material";
 import "./style.scss";
 import InputsArea from "@/app/home/components/InputsArea/InputsArea";
 import { useEffect, useRef, useState } from "react";
 import ConversationBody from "@/app/home/components/ConversationBody/conversation-body";
-========
-import {
-    Box,
-    Container,
-    Hidden,
-    Icon,
-    IconButton,
-    Stack,
-    TextField,
-    Typography,
-} from "@mui/material";
-import "../../styles/chat-interface.scss";
-import { FaHashtag } from "react-icons/fa6";
-import { HiHashtag } from "react-icons/hi2";
-import { useEffect, useRef, useState } from "react";
-import MessageBox from "../MessageBox/MessageBox";
-import InputArea from "../InputsArea/InputsArea";
->>>>>>>> cf4227531bbc57ad5afef2c1dcc7bf21921fa79a:client/components/ChatInterface/ChatInterface.jsx
 
 function getRandomInt(min, max) {
     if (min >= max) {
@@ -101,7 +82,7 @@ export default function ChatInterface() {
                     messages={messages}
                     msgEndRef={messagesEndRef}
                 />
-                <InputArea
+                <InputsArea
                     onClick={sendMessage}
                     onChange={handleChange}
                     value={inputTxt}

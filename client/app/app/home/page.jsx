@@ -1,10 +1,6 @@
-import { ConversationsSection } from "@/containers/home-page/ConversationsSection/conversations-section";
-import {
-    Box,
-    Stack,
-    ChatInterface,
-} from "./";
-import '../../styles/globals.scss'
+import ConversationsSection from "../../containers/home-page/ConversationsSection/conversations-section";
+import { Box, Stack, ChatInterface } from "./";
+import "../../styles/globals.scss";
 import "./style.scss";
 import { SideBar } from "./components/SideBar/side-bar";
 
@@ -21,8 +17,3 @@ export default function Home() {
         </main>
     );
 }
-
-
-
-
-
