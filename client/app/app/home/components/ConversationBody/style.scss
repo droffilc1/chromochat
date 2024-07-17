@@ -1,0 +1,18 @@
+@import '../../../../styles/base/variables';
+
+#conversation-body {
+    padding-top: 20px;
+    // background-color: red;
+    overflow-y: scroll;
+    height: 100%;
+    // background-image: url("../public/svg/logo-chromochat-gray-ic.svg");
+    // background-repeat: no-repeat;
+    // background-size: 150px;
+    // background-position: center;
+
+    #beginning--txt {
+        padding: 10px;
+        padding-bottom: 20px;
+        color: $border-secondary;
+    }
+}

@@ -1,25 +1,71 @@
+"use client";
+
+import "../../styles/globals.scss";
 import "./style.scss";
 import { useState, React } from "react";
-import { Box, Button, Divider, Stack, Typography } from "@mui/material";
-import CreateAcountPopUp from "./components/CreateAcountPopUp";
+import {
+    Box,
+    Button,
+    Divider,
+    Drawer,
+    Modal,
+    Stack,
+    Typography,
+} from "@mui/material";
+import SignupModalBoxPopUp from "./components/SignupModalBoxPopUp/signup-modal-box-popup";
 import { FaGoogle, FaApple } from "react-icons/fa";
 import { BsApple } from "react-icons/bs";
 import Head from "next/head";
 import Image from "next/image";
-import HeroLogoBanner from "./public/svg/logo-chromochat.svg";
+import HeroLogoBanner from "../../public-assets/illustrations/chromocircles.svg";
+import ChromchatLogo from "../../public-assets/logos/logo-chromochat-ic.svg";
 
 export default function Page() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+
     return (
         <>
-            <Head>
-                <title>Next App</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
             <main>
+                <Modal
+                    open={isModalOpen}
+                    className="signup__modal"
+                    sx={{
+                        "&.MuiModal-hidden": {
+                            color: "red",
+                            backgroundColor: "red",
+                        },
+                    }}
+                >
+                    <SignupModalBoxPopUp onClose={closeModal} />
+                </Modal>
                 <Box id="main-container">
                     <Stack direction="row" id="flex-container-divider">
+                        {/* PART 2 */}
+                        <Box id="part-2">
+                            <Image
+                                id="hero-logo-banner"
+                                src={HeroLogoBanner}
+                            ></Image>
+                        </Box>
                         <Box id="part-1">
                             <Box id="wrapper__1" mx="auto">
+                                <Stack
+                                    direction="row"
+                                    alignItems="flex-end"
+                                    className="wrapper1__stacker"
+                                    spacing={0.7}
+                                >
+                                    <Image src={ChromchatLogo} width={55} />
+                                    <Typography
+                                        variant="h1"
+                                        className="logo-title"
+                                    >
+                                        chromochat
+                                    </Typography>
+                                </Stack>
                                 <Typography variant="h1" id="main-h1">
                                     It's all about chatting
                                 </Typography>
@@ -27,7 +73,7 @@ export default function Page() {
                                 <Box id="box-1">
                                     {" "}
                                     <Typography variant="h2" id="main-h2">
-                                        Sign up now.
+                                        Sign-up.
                                     </Typography>
                                     {/* 1 */}
                                     <Box id="box-1-inner1">
@@ -37,7 +83,7 @@ export default function Page() {
                                             startIcon={<FaGoogle />}
                                             color="secondary"
                                         >
-                                            Sign up with Google
+                                           Sign up with Google
                                         </Button>
                                         <Button
                                             className="signup-with-_"
@@ -45,7 +91,7 @@ export default function Page() {
                                             startIcon={<BsApple />}
                                             color="secondary"
                                         >
-                                            Sign up with Apple
+                                             Sign up with Apple
                                         </Button>
                                     </Box>
                                     {/* 2 */}
@@ -59,6 +105,7 @@ export default function Page() {
                                         <Button
                                             id="create-account-button"
                                             variant="contained"
+                                            onClick={openModal}
                                         >
                                             Create an account
                                         </Button>
@@ -89,118 +136,9 @@ export default function Page() {
                                 </Box>
                             </Box>
                         </Box>
-
-                        {/* PART 2 */}
-                        <Box id="part-2">
-                            <Image id="hero-logo-banner"  src={HeroLogoBanner}></Image>
-                        </Box>
                     </Stack>
                 </Box>
             </main>
         </>
     );
 }
-
-const BirthDateSelector = () => {
-    const [month, setMonth] = useState("");
-    const [day, setDay] = useState("");
-    const [year, setYear] = useState("");
-
-    const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    ];
-    
-    let days = Array.from({ length: 31 }, (_, i) => i + 1);
-    const years = Array.from(
-        { length: 101 },
-        (_, i) => new Date().getFullYear() - i
-    );
-    
-    if (month === "February") {
-        const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-        if (isLeapYear) {
-            days = Array.from({ length: 29 }, (_, i) => i + 1);
-        } else {
-            days = Array.from({ length: 28 }, (_, i) => i + 1);
-        }
-    } else if (["April", "June", "September", "November"].includes(month)) {
-        days = Array.from({ length: 30 }, (_, i) => i + 1);
-    }
-
-    return (
-        <Box className="month-day-year">
-            <Stack direction="horizontal" gap={2}>
-                {/* Months */}
-                <Box width={220}>
-                    <FormControl fullWidth>
-                        <InputLabel id="month-select-lbl">Month</InputLabel>
-                        <Select
-                            value={month}
-                            labelId="month-select-lbl"
-                            id="month-select"
-                            label="Month"
-                            onChange={(e) => setMonth(e.target.value)}
-                        >
-                            {months.map((m, i) => (
-                                <MenuItem key={i} value={m}>
-                                    {m}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Box>
-
-                {/* Days */}
-                <Box width={100}>
-                    <FormControl fullWidth>
-                        <InputLabel id="month-select-lbl">Day</InputLabel>
-                        <Select
-                            value={day}
-                            labelId="day-select-lbl"
-                            id="day-select"
-                            label="Day"
-                            onChange={(e) => setDay(e.target.value)}
-                        >
-                            {days.map((m, i) => (
-                                <MenuItem key={i} value={m}>
-                                    {m}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Box>
-
-                {/* Years */}
-                <Box width={100}>
-                    <FormControl fullWidth>
-                        <InputLabel id="month-select-lbl">Year</InputLabel>
-                        <Select
-                            value={year}
-                            labelId="year-select-lbl"
-                            id="year-select"
-                            label="Year"
-                            onChange={(e) => setYear(e.target.value)}
-                        >
-                            {years.map((m, i) => (
-                                <MenuItem key={i} value={m}>
-                                    {m}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Box>
-            </Stack>
-        </Box>
-    );
-};

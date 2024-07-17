@@ -1,10 +1,5 @@
-//variables
-$primary-color: #eeeeee;
-$secondary-color: black;
-$grey-color: #787a7a;
-$light-dark-color: #657786;
-$border-primary: #2c2e31;
-$spicy-color: #E1E8ED;
+@import '../../styles/base/variables';
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Playwrite+CU:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Ubuntu:ital,wght@0,400;0,500;0,700;1,500&display=swap');
 
 html,
 body {
@@ -14,10 +9,6 @@ body {
     height: 100vh;
     background-color: black;
     overflow-x: hidden;
-}
-
-* {
-    box-sizing: border-box;
 }
 
 main {
@@ -32,32 +23,55 @@ main {
     background: $secondary-color;
     color: $primary-color;
 
+    .signup__modal {
+        // Targeting the paper element inside the modal
+        background-color: red;
+    }
+
     #flex-container-divider {
         max-height: 100vh;
         width: 100%;
 
         #part-1 {
-            width: 60%;
+            width: 100%;
             height: 100%;
+            margin-left: 50px;
             // background-color: green;
 
             #wrapper__1 {
-                width: 60%;
+                width: 70%;
                 height: 100%;
                 // // //
-                margin: 10%;
-                margin-left: 24%;
+                margin: 50px;
                 // background-color: lightgreen;
 
+                .wrapper1__stacker {
+                    margin-bottom: 20px;
+
+                    .logo-title {
+                        color: rgb(246, 237, 237);
+                        align-self: flex-end;
+
+                        font: {
+                            size: 45px;
+                            weight: 400;
+                            family: "Cabin", sans-serif;
+                        }
+
+                        font-optical-sizing: auto;
+                    }
+
+                }
+
                 #main-h1 {
-                    background-image: linear-gradient(109.6deg, rgba(103, 30, 117, 1) 11.2%, rgba(252, 76, 2, 1) 91.1%);
+                    background-image: linear-gradient(250.6deg, #ff8403ff 23.2%, #dd0ea9 91.1%);
                     background-clip: text;
                     color: transparent;
                     padding: 5px;
 
                     font: {
                         weight: 700;
-                        size: 10vh;
+                        size: 10.5vh;
                     }
                 }
 
@@ -67,12 +81,12 @@ main {
                         size: 4vh;
                     }
 
-                    margin-top: 50px;
-                    margin-bottom: 30px;
+                    margin-top: 45px;
+                    margin-bottom: 26px;
                 }
 
                 #box-1 {
-                    width: 75%;
+                    width: 79%;
 
                     #box-1-inner1 {
                         display: flex;
@@ -103,7 +117,6 @@ main {
                             &::after {
                                 border-color: $border-primary;
                             }
-
                         }
                     }
 
@@ -114,7 +127,7 @@ main {
                             width: 100%;
                             padding: 10px;
                             border-radius: 50px;
-                            background-image: linear-gradient(29.6deg, rgba(103, 30, 117, 0.766) 11.2%, rgba(252, 76, 2, 1) 91.1%);
+                            background-image: linear-gradient(29.6deg, rgba(255, 12, 178, 0.985) 10.2%, rgba(252, 76, 2, 1) 50.2%);
                         }
 
                         #terms-of-service {
@@ -129,7 +142,7 @@ main {
                     }
 
                     #sign-in-box {
-                        margin-top: 70px;
+                        margin-top: 50px;
                         display: flex;
                         align-items: baseline;
                         gap: 10px;
@@ -145,20 +158,21 @@ main {
 
         #part-2 {
             // background-color: grey;
-            width: 50%;
-            height: 100vh;
             display: flex;
             align-items: center;
+            margin-left: 180px;
+            width: 50%;
+
 
             #hero-logo-banner {
                 // background-color: #fff;
+                width: 450px;
             }
         }
     }
-
-
 }
 
-
-
-.MuiDivider-middle {}
+.MuiModal-root {
+    // Targeting the paper element inside the modal
+    background-color: #29364476;
+}
