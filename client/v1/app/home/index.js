@@ -5,7 +5,7 @@ import { HiLogout } from "react-icons/hi";
 import { LuUsers2 } from "react-icons/lu";
 import { FaRegCommentDots } from "react-icons/fa6";
 import UserDiscussionCard from "./components/UserDiscussionCard/UserDiscussionCard";
-import ChatInterface from "@/containers/home-page/ChatBodySection/chat-body-section";
+import ChatInterface from "../../containers/home-page/ChatBodySection/chat-body-section";
 import Logo from "../../public-assets/logos/logo-chromochat-ic.svg";
 import AdvIconButton from "./components/buttons/AdvIconButton/AdvIconButton";
 import { IoFilterOutline } from "react-icons/io5";

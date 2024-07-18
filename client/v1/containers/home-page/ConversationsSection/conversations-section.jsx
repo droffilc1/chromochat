@@ -1,3 +1,4 @@
+import { Paper } from "@mui/material";
 import {
     Box,
     Stack,
@@ -7,7 +8,7 @@ import {
     AdvIconButton,
     IoFilterOutline,
 } from "./";
-import './style.scss'
+import "./style.scss";
 
 export default function ConversationsSection() {
     return (
@@ -40,11 +41,18 @@ export default function ConversationsSection() {
                         </Stack>
                     </Stack>
                 </Box>
-                <Stack gap="24px" id="stacker-discussions">
-                    {Array.from({ length: 40 }, (_, index) => (
-                        <UserDiscussionCard key={index} />
-                    ))}
-                </Stack>
+                <Box className="stack__wrapper">
+                    <Stack gap="24px" id="stacker-discussions">
+                        <Box className="dummy-space" />
+                        {
+                            /*  */
+                            Array.from({ length: 60 }, (_, index) => (
+                                <UserDiscussionCard key={index} width="auto" />
+                            ))
+                            /*  */
+                        }
+                    </Stack>
+                </Box>
             </Box>
         </Box>
     );

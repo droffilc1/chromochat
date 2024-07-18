@@ -1,9 +1,9 @@
 "use client";
 import { Box } from "@mui/material";
 import "./style.scss";
-import InputsArea from "@/app/home/components/InputsArea/InputsArea";
+import InputsArea from "../../../app/home/components/InputsArea/InputsArea";
 import { useEffect, useRef, useState } from "react";
-import ConversationBody from "@/app/home/components/ConversationBody/conversation-body";
+import ConversationBody from "app/home/components/ConversationBody/conversation-body";
 
 function getRandomInt(min, max) {
     if (min >= max) {
