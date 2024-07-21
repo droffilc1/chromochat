@@ -11,6 +11,7 @@ const config: Config = {
       colors: {
         firstColor: '#163172',
         secondColor: '#1e56a0',
+        midColor: '#aed0ff',
         thirdColor: '#d6e4f0',
         fourthColor: '#f6f6f6'
       },

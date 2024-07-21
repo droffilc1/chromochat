@@ -61,7 +61,7 @@ const Input: React.FC<InputProps> = ({
                         ring-gray-300
                         focus:ring-2
                         focus:ring-inset
-                        focus:ring-sky-600
+                        focus:ring-secondColor
                         sm:text-sm
                         sm:leading-6`,
                         errors[id] && "focus:ring-red-800",
