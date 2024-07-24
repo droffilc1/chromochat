@@ -54,11 +54,10 @@ export default function Page() {
                             <Box id="wrapper__1" mx="auto">
                                 <Stack
                                     direction="row"
-                                    alignItems="flex-end"
                                     className="wrapper1__stacker"
                                     spacing={0.7}
                                 >
-                                    <Image src={ChromchatLogo} width={55} />
+                                    <Image src={ChromchatLogo} width={49}  height={47}/>
                                     <Typography
                                         variant="h1"
                                         className="logo-title"
@@ -83,7 +82,7 @@ export default function Page() {
                                             startIcon={<FaGoogle />}
                                             color="secondary"
                                         >
-                                           Sign up with Google
+                                            Sign up with Google
                                         </Button>
                                         <Button
                                             className="signup-with-_"
@@ -91,7 +90,7 @@ export default function Page() {
                                             startIcon={<BsApple />}
                                             color="secondary"
                                         >
-                                             Sign up with Apple
+                                            Sign up with Apple
                                         </Button>
                                     </Box>
                                     {/* 2 */}

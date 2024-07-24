@@ -5,7 +5,7 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Chromochat ApI Documentation',
+      title: 'Chromochat Api Documentation',
       version: '1.0.0',
       description: 'API documentation for the Chromochat API',
     },

@@ -1,12 +1,3 @@
-const textContentData = {
-    __AgeConfirmation__: () => (
-        <>
-            This information will not be displayed publicly. Confirm your age,
-            even if this account is for a business, a pet, or something else.
-        </>
-    ),
-};
-
 const months = [
     "January",
     "February",
@@ -28,6 +19,7 @@ const years = Array.from(
     (_, i) => new Date().getFullYear() - i
 );
 
+// I will try to integrate this changes with the code, importing everything here makes it doensn't work
 //* if (month === "February") {
 //*     const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 //     if (isLeapYear) {
@@ -39,5 +31,4 @@ const years = Array.from(
 //     days = Array.from({ length: 30 }, (_, i) => i + 1);
 //* }
 
-
-export { months, days, years, textContentData };
+export { months, days, years };

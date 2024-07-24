@@ -1,80 +1,208 @@
 "use client";
 
-import {
-    Box,
-    Button,
-    Container,
-    FormControl,
-    FormHelperText,
-    IconButton,
-    InputLabel,
-    MenuItem,
-    Select,
-    Stack,
-    TextField,
-    Typography,
-} from "@mui/material";
+import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import "./style.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoIosClose } from "react-icons/io";
-import { months, days, years, textContentData } from "./__constants__";
-import { debounce } from "lodash";
 import Image from "next/image";
 import ChromChatLogo from "../../../../public-assets/logos/logo-chromochat-ic.svg";
+import InputFullName from "../inputs/FullnameInput/component";
+import InputEmail from "../inputs/EmailAdressInput/component";
+import BirthDateText from "../contents/Text__Birthdate/component";
+import BirthDateSelector from "../inputs/Selector__birthdate/component";
+import InputPassword from "../inputs/PasswordInput/component";
+import InputConfirmPassword from "../inputs/ConfirmPasswordInput/component";
+import PasswordField from "../PasswordField/component";
+import PhoneNumberInput from "../inputs/PhoneNumberInput/component";
+import formatPhoneNumber from "utils/formattPhoneNumber";
+import libphonenumber from "google-libphonenumber";
+import TermsCheckBox from "../inputs/TermsCheckBox/component";
 
 export default function SignupModalBoxPopUp({ onClose }) {
     /**
-     * Looking for a better structure!
      * @returns SIGNUP MODAL POP-UP
      */
 
-    const [formData, set_formData] = useState({ fullname: "", email: "" });
-    const [errors, set_errors] = useState({});
-    //
+    const [formPart, setFormPart] = useState(0);
+    const [nextPart, setNextPart] = useState(false);
 
+    const [formData, setFormData] = useState({
+        fullname: "",
+        email: "",
+        phone: "",
+        password: "",
+        confirmPass: "",
+        bdMonth: "",
+        bdDay: "",
+        bdYear: "",
+        terms: false,
+    });
+    const [errors, setErrors] = useState({});
+
+    // PhoneNumber Field
+    const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
+
+    const validatePhoneNumber = (number) => {
+        const txtErrors = {};
+
+        try {
+            const phoneNumber = phoneUtil.parse(number, "US");
+            const isValid = phoneUtil.isValidNumber(phoneNumber);
+
+            if (!isValid)
+                txtErrors.phone = "Please enter a valid phone number.";
+        } catch (error) {}
+
+        // if (number) {
+        //     if (!isValid)
+
+        // }
+        console.log(txtErrors);
+        setErrors(txtErrors);
+    };
+
+    // Password Field
+    const [passwordMatch, setPasswordMatch] = useState(true);
+
+    const validatePasswords = (fd) => {
+        setPasswordMatch(fd.password === fd.confirmPass);
+
+        console.log(fd.password === fd.confirmPass);
+    };
+
+    // Email Field
     const validateEmail = (email) => {
         let txtErrors = {};
         let formatValid = true;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Adjusted to allow for more than .com domains
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (email) {
             formatValid = emailRegex.test(email);
 
             if (!formatValid)
                 txtErrors.email = "Please enter a valid email address.";
-            console.log(formatValid);
         }
 
-        set_errors(txtErrors);
+        setErrors(txtErrors);
 
         return Object.keys(txtErrors).length === 0 && formatValid;
     };
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        const updatedFormData = { ...formData, [name]: value };
-        set_formData(updatedFormData);
+        const { name, value, checked } = e.target;
 
-        if (name === "email") {
-            validateEmail(value); // Pass the current email value directly
+        if (e.target.type === "checkbox") {
+            setFormData({ ...formData, [name]: checked });
+        } else {
+            const updatedFormData = { ...formData, [name]: value };
+            setFormData(updatedFormData);
+
+            if (name === "confirmPass") validatePasswords(updatedFormData);
+            if (name === "password" && formData.confirmPass)
+                validatePasswords(updatedFormData);
+            if (name === "phone") {
+                setFormData({
+                    ...updatedFormData,
+                    [name]: formatPhoneNumber(value),
+                });
+                validatePhoneNumber(value);
+            }
+            if (name === "email") {
+                validateEmail(value);
+            }
         }
     };
+
+    const monthChange = (e) => {
+        setMonth(e.target.value);
+    };
+
     //
 
-    const validateForm = () => {
+    const validatePart2 = () => {
+        // console.log(
+        //     Object.keys(errors).length === 0 &&
+        //         !!formData.phone &&
+        //         !!formData.password &&
+        //         !!formData.confirmPass &&
+        //         !!formData.terms,
+        //     Object.keys(errors).length === 0,
+        //     !!formData.phone,
+        //     !!formData.password,
+        //     !!formData.confirmPass,
+        //     !!formData.terms,
+        //     errors
+        // );
+        return (
+            Object.keys(errors).length === 0 &&
+            !!formData.phone &&
+            !!formData.password &&
+            !!formData.confirmPass &&
+            !!formData.terms
+        );
+    };
+
+    const validatePart1 = () => {
         return (
             Object.keys(errors).length === 0 &&
             !!formData.fullname &&
-            !!formData.email
+            !!formData.email &&
+            !!formData.bdMonth &&
+            !!formData.bdDay &&
+            !!formData.bdYear
         );
     };
     //
 
-    const handleSubmit = (e) => {
+    //handle Previous and Next Buttons
+    const handleNext = (e) => {
+        e.preventDefault();
+        if (validatePart1()) {
+            setNextPart(true);
+        }
+    };
+
+    // handle successful signup
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (validateForm()) {
+        if (validatePart1() && validatePart2() && formData.terms) {
             console.log("Data:", formData);
+
+            setNextPart(true);
+
+            try {
+                const response = await fetch(
+                    "http://localhost:5000/auth/register",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            fullname: formData.fullname,
+                            email: formData.email,
+                            password: formData.password,
+                            phone: formatPhoneNumber(formData.phone),
+                            bdDay: formData.bdDay,
+                            bdMonth: formData.bdMonth,
+                            bdYear: formData.bdYear,
+                        }),
+                    }
+                );
+
+                const data = await response.json();
+
+                if (response.status == 201) {
+                    console.log("User registered successfully", data);
+
+                    onClose();
+                } else {
+                    console.log("Error:", data.message);
+                }
+            } catch (error) {
+                console.error("Error occurred..!", error);
+            }
         }
     };
 
@@ -103,7 +231,11 @@ export default function SignupModalBoxPopUp({ onClose }) {
                     </Box>
                     <Box id="signup-logo" width="100%" textAlign="center">
                         {/* <h1>Chromochat</h1> */}
-                        <Image src={ChromChatLogo} className="signup-logo__logo"/>
+                        <Image
+                            src={ChromChatLogo}
+                            className="signup-logo__logo"
+                            width={55}
+                        />
                     </Box>
                 </Stack>
                 <Box
@@ -122,170 +254,100 @@ export default function SignupModalBoxPopUp({ onClose }) {
                             Create your account{" "}
                         </Typography>
                         {/* the form */}
-                        <Box className="sign-up-form">
-                            <Stack spacing={3}>
-                                <InputFullName
-                                    value={formData.fullname}
-                                    change={handleChange}
-                                    error={errors.fullname}
-                                />
-                                <InputEmail
-                                    value={formData.email}
-                                    change={handleChange}
-                                    error={errors.email}
-                                />
-                            </Stack>
+                        <Box
+                            className="part-1__create-account"
+                            display={nextPart ? "none" : "block"}
+                            sx={{
+                                transform: nextPart
+                                    ? "translateY(-50%)"
+                                    : "translateY(0%)",
+                                transition: "transform 0.5s ease-in-out",
+                            }}
+                        >
+                            <Box className="sign-up-form">
+                                <Stack spacing={3}>
+                                    <InputFullName
+                                        value={formData.fullname}
+                                        change={handleChange}
+                                        error={errors.fullname}
+                                    />
+                                    <InputEmail
+                                        value={formData.email}
+                                        change={handleChange}
+                                        error={errors.email}
+                                    />
+                                </Stack>
 
-                            {/* birth date */}
-                            <Box id="birth-date" marginTop={3}>
-                                <BirthDateText />
-                                <Box my={2} />
-                                <BirthDateSelector />
+                                {/* birth date */}
+                                <Box id="birth-date" marginTop={3}>
+                                    <BirthDateText />
+                                    <Box my={2} />
+                                    <BirthDateSelector
+                                        monthValue={formData.bdMonth}
+                                        dayValue={formData.bdDay}
+                                        yearValue={formData.bdYear}
+                                        onChange={handleChange}
+                                    />
+                                </Box>
+                            </Box>
+                            <Box className="signup-next">
+                                <Button
+                                    variant="contained"
+                                    className="signup-button-next"
+                                    color="secondary"
+                                    disabled={!validatePart1()}
+                                    onClick={handleNext}
+                                >
+                                    Next
+                                </Button>
                             </Box>
                         </Box>
-                    </Box>
-                    <Box className="signup-next">
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            className="signup-button-next"
-                            color="secondary"
-                            disabled={!validateForm()}
+
+                        <Box
+                            className="part-2__password-form"
+                            display={!nextPart ? "none" : "block"}
+                            sx={{
+                                transform: !nextPart
+                                    ? "translateY(-50%)"
+                                    : "translateY(0%)",
+                            }}
                         >
-                            Next
-                        </Button>
+                            <Stack spacing={3} mb={4}>
+                                <PhoneNumberInput
+                                    value={formData.phone}
+                                    change={handleChange}
+                                    error={errors.phone}
+                                />
+                                <PasswordField
+                                    values={{
+                                        passwordValue: formData.password,
+                                        confirmPasswordValue:
+                                            formData.confirmPass,
+                                    }}
+                                    change={handleChange}
+                                    error={!passwordMatch}
+                                />
+                                <TermsCheckBox
+                                    checked={formData.terms}
+                                    change={handleChange}
+                                />
+                                <Box marginTop="410px" />
+                                <Button
+                                    width="100%"
+                                    type="submit"
+                                    variant="contained"
+                                    className="signup-button"
+                                    color="secondary"
+                                    sx={{ padding: "12px 10px" }}
+                                    disabled={!validatePart2()}
+                                >
+                                    Sign up
+                                </Button>
+                            </Stack>
+                        </Box>
                     </Box>
                 </Box>
             </Stack>
         </Box>
     );
 }
-
-/* Fullname input */
-const InputFullName = ({ value, change, error }) => {
-    return (
-        <TextField
-            type="text"
-            variant="outlined"
-            label="Full name"
-            name="fullname"
-            className="input-outlined-basic"
-            color="primary"
-            value={value}
-            onChange={change}
-            error={!!error}
-            helperText={error}
-        />
-    );
-};
-
-/* Email input */
-const InputEmail = ({ value, change, error }) => {
-    return (
-        <TextField
-            type="email"
-            name="email"
-            variant="outlined"
-            label="Email"
-            autoComplete="email"
-            className="input-outlined-basic"
-            color="primary"
-            value={value}
-            onChange={change}
-            error={!!error}
-            helperText={error}
-        />
-    );
-};
-
-const BirthDateText = () => {
-    return (
-        <>
-            {" "}
-            <Typography variant="h6" component="h4" className="bday-title">
-                Birth date
-            </Typography>
-            <Typography
-                variant="subtitle2"
-                component="small"
-                color="secondary.dark"
-                fontWeight={400}
-            >
-                {<textContentData.__AgeConfirmation__ />}
-            </Typography>
-        </>
-    );
-};
-
-/* Birthdate Selector */
-const BirthDateSelector = () => {
-    const [month, setMonth] = useState("");
-    const [day, setDay] = useState("");
-    const [year, setYear] = useState("");
-
-    return (
-        <Box className="month-day-year">
-            <Stack direction="horizontal" gap={2}>
-                {/* Months */}
-                <Box width={220}>
-                    <FormControl fullWidth color="primary">
-                        <InputLabel id="month-select-lbl">Month</InputLabel>
-                        <Select
-                            value={month}
-                            labelId="month-select-lbl"
-                            id="month-select"
-                            label="Month"
-                            onChange={(e) => setMonth(e.target.value)}
-                        >
-                            {months.map((m, i) => (
-                                <MenuItem key={i} value={m} color="secondary">
-                                    {m}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Box>
-
-                {/* Days */}
-                <Box width={100}>
-                    <FormControl fullWidth>
-                        <InputLabel id="month-select-lbl">Day</InputLabel>
-                        <Select
-                            value={day}
-                            labelId="day-select-lbl"
-                            id="day-select"
-                            label="Day"
-                            onChange={(e) => setDay(e.target.value)}
-                        >
-                            {days.map((m, i) => (
-                                <MenuItem key={i} value={m}>
-                                    {m}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Box>
-
-                {/* Years */}
-                <Box width={100}>
-                    <FormControl fullWidth>
-                        <InputLabel id="month-select-lbl">Year</InputLabel>
-                        <Select
-                            value={year}
-                            labelId="year-select-lbl"
-                            id="year-select"
-                            label="Year"
-                            onChange={(e) => setYear(e.target.value)}
-                        >
-                            {years.map((m, i) => (
-                                <MenuItem key={i} value={m}>
-                                    {m}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Box>
-            </Stack>
-        </Box>
-    );
-};

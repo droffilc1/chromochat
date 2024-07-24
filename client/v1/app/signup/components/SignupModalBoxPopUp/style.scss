@@ -6,16 +6,18 @@
     flex-direction: column;
     justify-content: center;
     height: 100%;
+    transition: all 0.3s ease;
 
 
     .container {
         background-color: $secondary-color;
         color: $primary-color;
-        max-width: 600px;
+        max-width: 590px;
         width: 100%;
         // background-color: red;
-        border-radius: 12px;
+        border-radius: 11px;
         padding: 0;
+        transition: all 0.3s ease;
 
         @media (max-width: 768px) {
             padding: 0 10px;
@@ -29,6 +31,8 @@
         }
 
         #inner-close_logo {
+            margin-bottom: 10px;
+
             #signup-close {
                 position: relative;
                 // left: 0;
@@ -75,13 +79,28 @@
             .signup-button-next {
                 margin-left: auto;
                 margin-right: auto;
-                width: 77%;
+                width: 100%;
                 background-color: $grey-color;
                 padding: 15px;
                 border-radius: 50px;
                 font-size: large;
             }
         }
+    }
+
+    .signup-button {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        background-color: $grey-color;
+        padding: 15px;
+        border-radius: 50px;
+        font-size: large;
+    }
+
+    .part-2__password-form {
+        background-color: rgba(19, 1, 37, 0.141);
+        transition: transform 5s ease-in-out;
     }
 }
 

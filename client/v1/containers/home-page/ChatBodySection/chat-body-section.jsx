@@ -4,6 +4,7 @@ import "./style.scss";
 import InputsArea from "../../../app/home/components/InputsArea/InputsArea";
 import { useEffect, useRef, useState } from "react";
 import ConversationBody from "app/home/components/ConversationBody/conversation-body";
+import { socket } from "socket";
 
 function getRandomInt(min, max) {
     if (min >= max) {
@@ -14,6 +15,8 @@ function getRandomInt(min, max) {
 }
 
 export default function ChatInterface() {
+    const [isConnected, setIsConnected] = useState(false);
+    const [transport, setTransport] = useState("N/A");
     const [messages, setMessages] = useState([
         {
             id: 0,
@@ -49,10 +52,13 @@ export default function ChatInterface() {
 
     const sendMessage = () => {
         if (inputTxt.trim()) {
-            setMessages([
-                ...messages,
-                { id: messages.length, txt: inputTxt, type: "right" },
-            ]);
+
+            socket.emit("sendMessage", inputTxt);
+
+            // setMessages([
+            //     ...messages,
+            //     { id: messages.length, txt: inputTxt, type: "right" },
+            // ]);
             setInputTxt("");
             if (inputRef.current) inputRef.current.focus();
         }
@@ -74,6 +80,40 @@ export default function ChatInterface() {
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
+    useEffect(() => {
+        if (socket.connected) {
+            onConnect();
+        }
+
+        function onConnect() {
+            setIsConnected(true);
+            setTransport(socket.io.engine.transport.name);
+
+            socket.io.engine.on("upgrade", (transport) => {
+                setTransport(transport.name);
+            });
+        }
+
+        function onDisconnect() {
+            setIsConnected(false);
+            setTransport("N/A");
+        }
+
+        socket.on("connect", onConnect);
+        socket.on("disconnect", onDisconnect);
+        socket.on("sendMessage", (msg) => {
+            setMessages([
+                ...messages,
+                { id: messages.length, txt: msg, type: "right" },
+            ]);
+            console.log(messages)
+        });
+
+        return () => {
+            socket.off("connect", onConnect);
+            socket.off("disconnect", onDisconnect);
+        };
+    }, []);
 
     return (
         <>
