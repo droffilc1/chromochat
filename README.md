@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Chromochat
+
+## Overview
+
+Chromochat is a cutting-edge chat application designed to bring people closer together through innovative features and a user-friendly interface.
+Whether you're connecting with friends, family, or colleagues, Chromochat provides a rich and dynamic communication experience tailored to your needs.
+
+## Technologies Used
+
+- Nextjs
+- Node.js
+- Scss
+- Mongodb
+- WebSockets
+
+## Features
+
+- Sign up a user
+- Login a user
+- Create a chat room
+- Send messages in a chat room
+- View users in a chat room
+- Profile
+
+## Motivation
+
+To enhance understanding of WebSocket communication.
 
 ## Getting Started
 
-First, run the development server:
+To get a local copy up and running you just need to follow the following steps in your terminal;
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+git clone "url"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+where "url" (without the quotation marks) is the url to this repository.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+For example:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+git clone https://github.com/droffilc1/chromochat.git
+```
 
-## Learn More
+Here you're copying the contents of the spendless repository on GitHub to your computer.
 
-To learn more about Next.js, take a look at the following resources:
+Change to the repository directory on your computer (if you are not already there):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+cd chromochat
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Build and Run Docker Container
 
-## Deploy on Vercel
+Build Docker image:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+docker-compose build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Then, start your application and its services:
+
+```bash
+docker-compose up
+```
+
+### Stopping and Removing Containers
+
+To stop and remove the containers, run:
+
+```bash
+docker-compose down
+```
+
+## References
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Learn Next.js](https://nextjs.org/learn)
+- [Express.js](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/docs/atlas/)
+- [Passport](https://www.passportjs.org/docs/)
+- [docker](https://docs.docker.com/)
+
+## Authors
+
+El Houssain Souhail - [Github](https://github.com/Ductive99)\
+Abderrahmane Nezhavi Nezhari - [Github](https://github.com/Abderrahmane369)\
+Clifford Mapesa - [Github](https://github.com/droffilc1)
+
+## License
+
+This project is licensed under the [MIT](./LICENSE) License.

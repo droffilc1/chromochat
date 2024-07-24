@@ -1,0 +1,119 @@
+@import '../../../../styles/base/variables';
+
+.signup__modal__container {
+    // background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+
+    .container {
+        background-color: $secondary-color;
+        color: $primary-color;
+        max-width: 600px;
+        width: 100%;
+        // background-color: red;
+        border-radius: 12px;
+        padding: 0;
+
+        @media (max-width: 768px) {
+            padding: 0 10px;
+            max-width: 100%;
+            width: 100%;
+            border-radius: 0;
+        }
+
+        .signup-form {
+            .input-outlined-basic {}
+        }
+
+        #inner-close_logo {
+            #signup-close {
+                position: relative;
+                // left: 0;
+            }
+
+            #signup-logo {
+                position: relative;
+                transform: translateX(-25px);
+                margin: 10px;
+            }
+        }
+
+        #inner-1 {
+            padding: 0 70px;
+
+            @media (max-width: 768px) {
+                padding: 0 20px;
+
+            }
+
+            #h4-title-main {
+                font-weight: bold;
+            }
+
+            #birth-date {
+                .bday-title {
+                    font: {
+                        weight: bold;
+                        size: 16px;
+                    }
+                }
+            }
+
+            .month-day-year {
+                margin-top: 10px;
+            }
+        }
+
+        .signup-next {
+            padding-top: 90px;
+            padding-bottom: 30px;
+            text-align: center;
+
+            .signup-button-next {
+                margin-left: auto;
+                margin-right: auto;
+                width: 77%;
+                background-color: $grey-color;
+                padding: 15px;
+                border-radius: 50px;
+                font-size: large;
+            }
+        }
+    }
+}
+
+// Overriding 
+// .MuiOutlinedInput-root fieldset {
+//   border: 1px solid $border-primary; // Light grey
+//   &:hover {
+//     border-color: $border-primary;
+//   }
+//   &.Mui-focused {
+//     border-color: #14171A; // Darker grey on focus
+//   }
+// }
+
+// .MuiOutlinedInput-root .MuiInputBase-input {
+//   color: #E1E8ED; // Secondary main color
+//   &:hover {
+//     color: #E1E8ED;
+//   }
+//   &.Mui-focused {
+//     color: #E1E8ED;
+//   }
+// }
+
+// .MuiInputLabel-outlined:not(.MuiInputLabel-shrink) {
+//   color: #131415; // Initial label color
+// }
+
+// .MuiInputLabel-outlined.MuiInputLabel-shrink {
+//   color: #E1E8ED; // Color when label shrinks (focused/hovered)
+// }
+
+// .MuiInputBase-input::placeholder {
+//   color: red; // Replace #yourColorHere with the desired color
+// }
