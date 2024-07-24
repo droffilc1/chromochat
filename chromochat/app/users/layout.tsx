@@ -1,14 +1,14 @@
-import getContacts from "../actions/getContacts";
+import getUsers from "../actions/getUsers";
 import Sidebar from "../components/sidebar/Sidebar";
 import ContactList from "./components/ContactList";
 
 export default async function UsersLayout({children}: {children: React.ReactNode}) {
-    const contacts = await getContacts();
+    const users = await getUsers();
     
     return (
         <Sidebar>
             <div className="h-full">
-                <ContactList items={contacts} />
+                <ContactList items={users} />
                 {children}
             </div>
         </Sidebar>

@@ -1,15 +1,16 @@
 "use client";
 
 import Avatar from "@/app/components/Avatar";
-import { User } from "@prisma/client";
+
 import axios from "axios";
+
+import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 
 interface ContactBoxProps {
     data: User;
 }
-
 
 const ContactBox: React.FC<ContactBoxProps> = ({ data }) => {
     const router = useRouter();
