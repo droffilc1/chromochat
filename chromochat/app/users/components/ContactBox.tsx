@@ -36,6 +36,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ data }) => {
                 flex
                 items-center
                 space-x-4
+                space-y-2
                 bg-white
                 p-4
                 hover:bg-thirdColor
@@ -51,7 +52,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ data }) => {
                         flex
                         justify-between
                         items-center
-                        mb-1
+                        mb-2
                     "
                     >
                         <p className="

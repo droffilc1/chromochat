@@ -14,7 +14,7 @@ const ContactList: React.FC<ContactListProps> = ({
         <aside
             className="
                 fixed
-                inset-y-0
+                inset-y-2
                 pb-20
                 lg:pb-20
                 lg:left-20
@@ -28,7 +28,7 @@ const ContactList: React.FC<ContactListProps> = ({
                 left-0
             "
         >
-            <div className="px-5">
+            <div className="px-5 pb-20">
                 <div className="flex-col">
                     <div className="
                         text-2xl
