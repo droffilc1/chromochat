@@ -15,11 +15,16 @@ Whether you're connecting with friends, family, or colleagues, Chromochat provid
 
 ## Features
 
-This can be a list of features or just a description of what this project does / what can be done with it. I prefer presenting information in a bullet or numbered list as it improves the ability to scan through and gather information quickly. Short, specific pieces of information are much easier to digest.
+- Sign up a user
+- Login a user
+- Create a chat room
+- Send messages in a chat room
+- View users in a chat room
+- Profile
 
 ## Motivation
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+To enhance understanding of WebSocket communication.
 
 ## Getting Started
 
@@ -45,55 +50,43 @@ Change to the repository directory on your computer (if you are not already ther
 cd chromochat
 ```
 
-Install dependencies:
+### Build and Run Docker Container
+
+Build Docker image:
 
 ```bash
-npm install
-# or
-yarn
-# or
-pnpm install
-# or
-bun install
+docker-compose build
 ```
 
-First, run the development server:
+Then, start your application and its services:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker-compose up
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Stopping and Removing Containers
 
-## Tests
-
-After ensuring everything is set up correctly, update your snapshots and run your tests again:
-
-**Update Snapshots**:
+To stop and remove the containers, run:
 
 ```bash
-npm test -- -u
-```
-
-**Run Tests**:
-
-```bash
-npm test
+docker-compose down
 ```
 
 ## References
 
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Learn Next.js](https://nextjs.org/learn)
+- [Express.js](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/docs/atlas/)
+- [Passport](https://www.passportjs.org/docs/)
+- [docker](https://docs.docker.com/)
 
 ## Authors
 
 El Houssain Souhail - [Github](https://github.com/Ductive99)\
 Abderrahmane Nezhavi Nezhari - [Github](https://github.com/Abderrahmane369)\
 Clifford Mapesa - [Github](https://github.com/droffilc1)
+
+## License
+
+This project is licensed under the [MIT](./LICENSE) License.

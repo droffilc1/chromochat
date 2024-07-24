@@ -38,13 +38,9 @@ This is a project's server side.
 
 ## Features
 
-- **Logging:** The project uses Winston for logging. Logs are stored in separate files based on log levels.
-
 - **MongoDB Database Setup:** The project integrates with MongoDB to store user data. Database configuration is handled using Mongoose.
 
-- **User Model and Controller:** The application includes a user model and controllers for user registration, login, token generation, password change, and password reset.
-
-- **Email Sending Feature:** Nodemailer is used to send emails. It's configured to send password reset and verification emails.
+- **User Model and Controller:** The application includes a user model and controllers for user registration, login, token generation.
 
 - **Role-Based Authorization:** The project includes role-based authorization using middleware. You can define roles and restrict access to certain routes.
 
@@ -52,17 +48,23 @@ This is a project's server side.
 
 ## Endpoints
 
-- **POST /register:** Register a new user.
+- **`POST /auth/register`:** Register a new user.
 
-- **POST /login:** Log in a user and get access and refresh tokens.
+- **`POST /auth/login:`** Log in a user.
 
-- **POST /refresh-token:** Generate a new access token using a valid refresh token.
+- **`POST /messages/send`:** Send a message to a chat room.
 
-- **POST /change-password:** Change a user's password using their current password.
+- **`GET /messages/{roomId}`:** Retrieve messages from a chat room.
 
-- **POST /forgot-password:** Send a password reset email to a user.
+- **`GET /messages/users/{roomId}`:** Retrieves bios of users in a chat room.
 
-- **POST /reset-password/:token:** Reset a user's password using a password reset token.
+- **`POST /profile/picture`:** Upload a profile picture.
+
+- **`POST /profile/:bio`:** Update user bio.
+
+- **`POST /rooms/create`:** Create a new chat room.
+
+- **`POST /rooms/join`:** Join an existing chat room.
 
 ## Contributing
 
