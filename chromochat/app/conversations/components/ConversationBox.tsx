@@ -9,6 +9,7 @@ import { Conversation, Message, User } from "@prisma/client";
 import { FullConversationType } from "@/app/types";
 import useOtherUser from "@/app/hooks/useOtherUser";
 import Avatar from "@/app/components/Avatar";
+import GroupAvatar from "@/app/components/GroupAvatar";
 
 interface ConversationBoxProps {
     data: FullConversationType;
@@ -65,7 +66,11 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({ data, selected }) => 
                 cursor-pointer
             `, selected ? 'bg-thirdColor' : 'bg-fourthColor')}
         >
-            <Avatar user={otherUser} />
+            {data.isGroup ? (
+                <GroupAvatar users={data.users} />
+            ) : (
+                <Avatar user={otherUser} />
+            )}
             <div className="min-w-0 flex-1">
                 <div className="focus:outline-none">
                     <div className="flex justify-between items-center mb-1">
