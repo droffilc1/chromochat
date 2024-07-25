@@ -9,6 +9,7 @@ import { TbArrowBackUp } from "react-icons/tb";
 import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 import ProfileDrawer from "./ProfileDrawer";
 import GroupAvatar from "@/app/components/GroupAvatar";
+import useActiveList from "@/app/hooks/useActiveList";
 
 interface HeaderProps {
     conversation: Conversation & {
@@ -19,14 +20,16 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ conversation }) => {
     const otherUser = useOtherUser(conversation);
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const { members } = useActiveList();
+    const isOnline = members.indexOf(otherUser?.email!) !== -1;
 
     const textStatus = useMemo(() => {
         if (conversation.isGroup) {
             return `${conversation.users.length} members`;
         }
 
-        return 'Online';
-    }, [conversation]);
+        return isOnline ? 'Online' : 'Offline';
+    }, [conversation, isOnline]);
     
     return (
         <>
