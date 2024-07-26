@@ -7,11 +7,11 @@ Whether you're connecting with friends, family, or colleagues, Chromochat provid
 
 ## Technologies Used
 
-- Nextjs
+- NextJS
 - Node.js
-- Scss
-- Mongodb
-- WebSockets
+- Tailwind
+- MongoDB
+- Prisma
 
 ## Features
 
@@ -21,10 +21,8 @@ Whether you're connecting with friends, family, or colleagues, Chromochat provid
 - Send messages in a chat room
 - View users in a chat room
 - Profile
-
-## Motivation
-
-To enhance understanding of WebSocket communication.
+- End-to-End Encryption
+- Multi-Device Support
 
 ## Getting Started
 
@@ -42,12 +40,15 @@ For example:
 git clone https://github.com/droffilc1/chromochat.git
 ```
 
-Here you're copying the contents of the spendless repository on GitHub to your computer.
+Here you're copying the contents of the chromochat repository on GitHub to your computer.
 
-Change to the repository directory on your computer (if you are not already there):
+Change to the repository directory on your computer and run the app (if you are not already there):
 
 ```bash
 cd chromochat
+cd src
+npm install
+npm run dev
 ```
 
 ### Build and Run Docker Container
@@ -76,9 +77,8 @@ docker-compose down
 
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Learn Next.js](https://nextjs.org/learn)
-- [Express.js](https://expressjs.com/)
 - [MongoDB](https://www.mongodb.com/docs/atlas/)
-- [Passport](https://www.passportjs.org/docs/)
+- [Prisma](https://www.prisma.io/docs)
 - [docker](https://docs.docker.com/)
 
 ## Authors
