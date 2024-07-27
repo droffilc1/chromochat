@@ -9,6 +9,7 @@ Whether you're connecting with friends, family, or colleagues, Chromochat provid
 
 - NextJS
 - Node.js
+- TypeScript
 - Tailwind
 - MongoDB
 - Prisma
