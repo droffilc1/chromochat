@@ -13,6 +13,8 @@ Whether you're connecting with friends, family, or colleagues, Chromochat provid
 - Tailwind
 - MongoDB
 - Prisma
+- Docker
+- Github Actions
 
 ## Features
 
