@@ -54,27 +54,43 @@ npm install
 npm run dev
 ```
 
-### Build and Run Docker Container
+### Steps to Run the Docker Container
 
-Build Docker image:
+1. **Pull the Docker Image**
 
-```bash
-docker-compose build
-```
+   Pull the Docker image from DockerHub:
 
-Then, start your application and its services:
+   ```bash
+   docker pull droffilc1/chromochat:latest
+   ```
 
-```bash
-docker-compose up
-```
+2. **Run the Docker Container**
 
-### Stopping and Removing Containers
+   Run the container in detached mode, mapping port 3000 on your local machine to port 3000 in the container:
 
-To stop and remove the containers, run:
+   ```bash
+   docker run -d -p 3000:3000 --name chromochat droffilc1/chromochat:latest
+   ```
 
-```bash
-docker-compose down
-```
+3. **Check Running Containers**
+
+   Verify that the container is running:
+
+   ```bash
+   docker ps
+   ```
+
+   You should see the `chromochat` container listed.
+
+4. **Access the Application**
+
+   Open a web browser and navigate to:
+
+   ```bash
+   http://localhost:3000
+   ```
+
+   You should see the Chromochat application running.
 
 ## References
 
