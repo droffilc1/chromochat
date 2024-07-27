@@ -1,1 +1,32 @@
+# Ignore node_modules (use the image's npm install instead)
 node_modules
+
+# Ignore logs
+logs
+*.log
+npm-debug.log*
+
+# Ignore environment variables
+.env
+
+# Ignore any local development settings
+.vscode
+.idea
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore build directories
+.next
+dist
+
+# Ignore test directories and files
+coverage
+tests
+*.test.js
+*.spec.js
+
+# Ignore Docker files and configurations
+Dockerfile*
+docker-compose*
