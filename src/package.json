@@ -31,6 +31,7 @@
     "react-icons": "^5.2.1",
     "react-select": "^5.8.0",
     "react-spinners": "^0.14.1",
+    "sharp": "^0.33.4",
     "zustand": "^4.5.4"
   },
   "devDependencies": {
